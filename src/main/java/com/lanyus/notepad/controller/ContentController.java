@@ -34,13 +34,15 @@ public class ContentController {
         if (content != null) {
             model.addAttribute("content", content);
         }
-        if (password != null || password.equals("")) {
-            Cookie[] cookies = request.getCookies();
-            if (cookies.length > 0) {
-                for (Cookie cookie : cookies) {
-                    if (cookie.getName().equals(uri)) {
-                        if (password.equals(cookie.getValue())) {
-                            return "content";
+        if (password != null) {
+            if (!password.equals("")) {
+                Cookie[] cookies = request.getCookies();
+                if (cookies.length > 0) {
+                    for (Cookie cookie : cookies) {
+                        if (cookie.getName().equals(uri)) {
+                            if (password.equals(cookie.getValue())) {
+                                return "content";
+                            }
                         }
                     }
                 }

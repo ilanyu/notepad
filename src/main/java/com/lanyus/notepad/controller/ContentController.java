@@ -36,10 +36,12 @@ public class ContentController {
         }
         if (password != null || password.equals("")) {
             Cookie[] cookies = request.getCookies();
-            for (Cookie cookie : cookies) {
-                if (cookie.getName().equals(uri)) {
-                    if (password.equals(cookie.getValue())) {
-                        return "content";
+            if (cookies.length > 0) {
+                for (Cookie cookie : cookies) {
+                    if (cookie.getName().equals(uri)) {
+                        if (password.equals(cookie.getValue())) {
+                            return "content";
+                        }
                     }
                 }
             }

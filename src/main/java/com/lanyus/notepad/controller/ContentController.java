@@ -37,7 +37,7 @@ public class ContentController {
         if (password != null) {
             if (!password.equals("")) {
                 Cookie[] cookies = request.getCookies();
-                if (cookies.length > 0) {
+                if (cookies != null) {
                     for (Cookie cookie : cookies) {
                         if (cookie.getName().equals(uri)) {
                             if (password.equals(cookie.getValue())) {

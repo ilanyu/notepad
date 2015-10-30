@@ -28,26 +28,26 @@ public class ContentController {
         String baseUrl = url.replaceAll("/" + uri,"");
         String content = service.getContentByUri(uri);
         String password = service.getPasswordByUri(uri);
-        model.addAttribute("uri",uri);
-        model.addAttribute("url",url);
-        model.addAttribute("baseurl",baseUrl);
-        if (content != null) {
-            model.addAttribute("content", content);
-        }
         if (password != null) {
             if (!password.equals("")) {
                 Cookie[] cookies = request.getCookies();
                 if (cookies != null) {
                     for (Cookie cookie : cookies) {
                         if (cookie.getName().equals(uri)) {
-                            if (password.equals(cookie.getValue())) {
-                                return "content";
+                            if (!password.equals(cookie.getValue())) {
+                                return "redirect:/options/password/show/" + uri;
                             }
                         }
                     }
                 }
             }
             return "redirect:/options/password/show/" + uri;
+        }
+        model.addAttribute("uri",uri);
+        model.addAttribute("url",url);
+        model.addAttribute("baseurl",baseUrl);
+        if (content != null) {
+            model.addAttribute("content", content);
         }
         return "content";
     }

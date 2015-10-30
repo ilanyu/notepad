@@ -34,8 +34,14 @@ public class ContentController {
                 if (cookies != null) {
                     for (Cookie cookie : cookies) {
                         if (cookie.getName().equals(uri)) {
-                            if (!password.equals(cookie.getValue())) {
-                                return "redirect:/options/password/show/" + uri;
+                            if (password.equals(cookie.getValue())) {
+                                model.addAttribute("uri",uri);
+                                model.addAttribute("url",url);
+                                model.addAttribute("baseurl",baseUrl);
+                                if (content != null) {
+                                    model.addAttribute("content", content);
+                                }
+                                return "content";
                             }
                         }
                     }

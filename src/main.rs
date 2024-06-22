@@ -16,11 +16,12 @@ use tower::ServiceExt;
 struct Assets;
 
 lazy_static! {
-    static ref DB: Mutex<PickleDb> = Mutex::new(PickleDb::load("data.db", PickleDbDumpPolicy::AutoDump, SerializationMethod::Bin).unwrap_or(PickleDb::new("data.db", PickleDbDumpPolicy::AutoDump, SerializationMethod::Bin)));
+    static ref DB: Mutex<PickleDb> = Mutex::new(PickleDb::load("data/data.db", PickleDbDumpPolicy::AutoDump, SerializationMethod::Bin).unwrap_or(PickleDb::new("data/data.db", PickleDbDumpPolicy::AutoDump, SerializationMethod::Bin)));
 }
 
 #[tokio::main]
 async fn main() {
+    let _ = std::fs::create_dir_all("data");
     let app = Router::new()
         .route("/", get(redirect))
         .nest_service("/favicon.ico", ServeEmbed::<Assets>::new())

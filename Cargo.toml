@@ -1,0 +1,16 @@
+[package]
+name = "notepad"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+axum = "0.7.5"
+serde = { version = "1.0.203", features = ["derive"] }
+tokio = { version = "1.38.0", features = ["rt", "rt-multi-thread", "macros"] }
+rust-embed="8.4.0"
+pickledb = "0.5.1"
+lazy_static = "1.4.0"
+rand = "0.8.4"
+tower = "0.4.13"
+tower-http = { version = "0.5.2", features = ["fs", "trace"] }
+axum-embed = "0.1.0"

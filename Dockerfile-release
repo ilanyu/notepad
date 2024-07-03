@@ -15,5 +15,7 @@ RUN if [ "$TARGETPLATFORM" = "linux/amd64" ]; then \
 
 FROM scratch
 COPY --from=builder /bin/notepad /bin/notepad
-STOPSIGNAL SIGINT
+EXPOSE 3000
+VOLUME /data
+WORKDIR /
 ENTRYPOINT ["/bin/notepad"]

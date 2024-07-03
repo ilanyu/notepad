@@ -162,7 +162,7 @@ jobs:
       - name: Build and push
         uses: docker/build-push-action@v5
         with:
-          file: Dockerfile-release
+          file: Dockerfile
           build-args: |
             REPO=${{ github.repository }}
             VER=${{ github.ref_name }}
